@@ -1,12 +1,13 @@
 # Liquibase Rollback One Changeset Action
 Official GitHub Action to run Liquibase Rollback One Changeset in your GitHub Action Workflow. For more information on how rollback one changeset works visit the [Official Liquibase Documentation](https://docs.liquibase.com/commands/home.html).
 ## Rollback One Changeset
+[PRO]
 Rollback one changeset from the database
 ## Usage
 ```yaml
 steps:
 - uses: actions/checkout@v3
-- uses: liquibase-github-actions/rollback-one-changeset@v4.17.2
+- uses: liquibase-github-actions/rollback-one-changeset@v4.18.0
   with:
     # The root changelog
     # string
@@ -95,7 +96,7 @@ The liquibase rollback one changeset action accepts all valid liquibase global o
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: liquibase-github-actions/rollback-one-changeset@v4.17.2
+  - uses: liquibase-github-actions/rollback-one-changeset@v4.18.0
     with:
       changelogFile: ""
       url: ""
