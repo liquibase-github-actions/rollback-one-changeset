@@ -9,12 +9,27 @@ steps:
 - uses: actions/checkout@v3
 - uses: liquibase-github-actions/rollback-one-changeset@v4.23.0
   with:
-    # The root changelog
+    # The root changelog file
     # string
     # Required
     changelogFile: ""
 
-    # The JDBC target database connection URL
+    # The author of the changeset to rollback
+    # string
+    # Required
+    changesetAuthor: ""
+
+    # The id of the changeset to rollback
+    # string
+    # Required
+    changesetId: ""
+
+    # The target database password
+    # string
+    # Required
+    changesetPath: ""
+
+    # The JDBC database connection URL
     # string
     # Required
     url: ""
@@ -29,20 +44,10 @@ steps:
     # Optional
     changeExecListenerPropertiesFile: ""
 
-    # The author of the changeset to rollback
+    # Context string to use for filtering
     # string
     # Optional
-    changesetAuthor: ""
-
-    # The id of the changeset to rollback
-    # string
-    # Optional
-    changesetId: ""
-
-    # The target database password
-    # string
-    # Optional
-    changesetPath: ""
+    contexts: ""
 
     # The default catalog name to use for the database connection
     # string
@@ -69,7 +74,12 @@ steps:
     # Optional
     force: ""
 
-    # The target database password
+    # Label expression to use for filtering
+    # string
+    # Optional
+    labelFilter: ""
+
+    # Password to use to connect to the database
     # string
     # Optional
     password: ""
@@ -79,7 +89,7 @@ steps:
     # Optional
     rollbackScript: ""
 
-    # The target database username
+    # Username to use to connect to the database
     # string
     # Optional
     username: ""
@@ -99,6 +109,9 @@ steps:
   - uses: liquibase-github-actions/rollback-one-changeset@v4.23.0
     with:
       changelogFile: ""
+      changesetAuthor: ""
+      changesetId: ""
+      changesetPath: ""
       url: ""
       headless: true
       licenseKey: ${{ secrets.LIQUIBASE_LICENSE_KEY }}

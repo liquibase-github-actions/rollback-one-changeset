@@ -11,16 +11,19 @@ inputs:
     description: 'Path to a properties file for the ChangeExecListenerClass'
     required: false
   changelogFile: # string
-    description: '*required* The root changelog'
+    description: '*required* The root changelog file'
     required: true
   changesetAuthor: # string
-    description: 'The author of the changeset to rollback'
-    required: false
+    description: '*required* The author of the changeset to rollback'
+    required: true
   changesetId: # string
-    description: 'The id of the changeset to rollback'
-    required: false
+    description: '*required* The id of the changeset to rollback'
+    required: true
   changesetPath: # string
-    description: 'The target database password'
+    description: '*required* The target database password'
+    required: true
+  contexts: # string
+    description: 'Context string to use for filtering'
     required: false
   defaultCatalogName: # string
     description: 'The default catalog name to use for the database connection'
@@ -37,17 +40,20 @@ inputs:
   force: # bool
     description: 'A required safety flag to indicate you intend to use this feature'
     required: false
+  labelFilter: # string
+    description: 'Label expression to use for filtering'
+    required: false
   password: # string
-    description: 'The target database password'
+    description: 'Password to use to connect to the database'
     required: false
   rollbackScript: # string
     description: 'The path to the script to use to perform the rollback'
     required: false
   url: # string
-    description: '*required* The JDBC target database connection URL'
+    description: '*required* The JDBC database connection URL'
     required: true
   username: # string
-    description: 'The target database username'
+    description: 'Username to use to connect to the database'
     required: false
   alwaysDropInsteadOfReplace: # bool
     description: 'If true, drop and recreate a view instead of replacing it.'
@@ -72,6 +78,9 @@ inputs:
     required: false
   convertDataTypes: # bool
     description: 'Should Liquibase convert to/from STANDARD data types. Applies to both snapshot and update commands.'
+    required: false
+  customLogDataFile: # string
+    description: '[PRO]Relative or fully qualified path to a yaml file containing key:value data to inject or exclude data from JSON structured logs. Learn more at https://docs.liquibase.com/structured-logging'
     required: false
   databaseChangelogLockTableName: # string
     description: 'Name of table to use for tracking concurrent Liquibase usage'
@@ -103,6 +112,9 @@ inputs:
   filterLogMessages: # bool
     description: 'DEPRECATED: No longer used'
     required: false
+  flowVerboseToString: # bool
+    description: 'If true, display a more verbose output for the FlowFile toString representation'
+    required: false
   generateChangesetCreatedValues: # bool
     description: 'Should Liquibase include a "created" attribute in diff/generateChangelog changesets with the current datetime'
     required: false
@@ -111,18 +123,6 @@ inputs:
     required: false
   headless: # bool
     description: 'Force liquibase to think it has no access to a keyboard'
-    required: false
-  hubApiKey: # string
-    description: 'Liquibase Hub API key for operations'
-    required: false
-  hubLogLevel: # string
-    description: 'Log level for filtering log messages to send to Liquibase Hub during operations. Values can be any acceptable log level.'
-    required: false
-  hubMode: # string
-    description: 'Content to send to Liquibase Hub during operations. Values can be "all", "meta", or "off"'
-    required: false
-  hubUrl: # string
-    description: 'Liquibase Hub URL for operations'
     required: false
   includeCatalogInSpecification: # bool
     description: 'Should Liquibase include the catalog name when determining equality?'
@@ -217,6 +217,9 @@ inputs:
   sqlLogLevel: # string
     description: 'Level to log SQL statements to'
     required: false
+  sqlShowSqlWarnings: # bool
+    description: 'Show SQLWarning messages'
+    required: false
   strict: # bool
     description: 'Be stricter on allowed Liquibase configuration and setup?'
     required: false
@@ -239,11 +242,13 @@ runs:
     - ${{ inputs.changesetAuthor }}
     - ${{ inputs.changesetId }}
     - ${{ inputs.changesetPath }}
+    - ${{ inputs.contexts }}
     - ${{ inputs.defaultCatalogName }}
     - ${{ inputs.defaultSchemaName }}
     - ${{ inputs.driver }}
     - ${{ inputs.driverPropertiesFile }}
     - ${{ inputs.force }}
+    - ${{ inputs.labelFilter }}
     - ${{ inputs.password }}
     - ${{ inputs.rollbackScript }}
     - ${{ inputs.url }}
@@ -256,6 +261,7 @@ runs:
     - ${{ inputs.changelogParseMode }}
     - ${{ inputs.classpath }}
     - ${{ inputs.convertDataTypes }}
+    - ${{ inputs.customLogDataFile }}
     - ${{ inputs.databaseChangelogLockTableName }}
     - ${{ inputs.databaseChangelogTableName }}
     - ${{ inputs.databaseClass }}
@@ -266,13 +272,10 @@ runs:
     - ${{ inputs.errorOnCircularIncludeAll }}
     - ${{ inputs.fileEncoding }}
     - ${{ inputs.filterLogMessages }}
+    - ${{ inputs.flowVerboseToString }}
     - ${{ inputs.generateChangesetCreatedValues }}
     - ${{ inputs.generatedChangesetIdsContainsDescription }}
     - ${{ inputs.headless }}
-    - ${{ inputs.hubApiKey }}
-    - ${{ inputs.hubLogLevel }}
-    - ${{ inputs.hubMode }}
-    - ${{ inputs.hubUrl }}
     - ${{ inputs.includeCatalogInSpecification }}
     - ${{ inputs.includeSystemClasspath }}
     - ${{ inputs.licenseKey }}
@@ -304,6 +307,7 @@ runs:
     - ${{ inputs.shouldSnapshotData }}
     - ${{ inputs.showBanner }}
     - ${{ inputs.sqlLogLevel }}
+    - ${{ inputs.sqlShowSqlWarnings }}
     - ${{ inputs.strict }}
     - ${{ inputs.supportPropertyEscaping }}
     - ${{ inputs.useProcedureSchema }}
