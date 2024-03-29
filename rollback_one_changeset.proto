@@ -12,8 +12,7 @@ service RollbackOneChangesetService {
   rpc execute(RollbackOneChangesetRequest) returns (Response) {}
 }
 
-/* [PRO]
-Rollback one changeset from the database */
+/* [PRO] Rollback one changeset from the database */
 message RollbackOneChangesetRequest {
   optional string change_exec_listener_class = 1; // Fully-qualified class which specifies a ChangeExecListener
   optional string change_exec_listener_properties_file = 2; // Path to a properties file for the ChangeExecListenerClass
