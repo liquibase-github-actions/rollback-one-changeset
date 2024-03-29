@@ -7,7 +7,7 @@ Rollback one changeset from the database
 ```yaml
 steps:
 - uses: actions/checkout@v3
-- uses: liquibase-github-actions/rollback-one-changeset@v4.26.0
+- uses: liquibase-github-actions/rollback-one-changeset@v4.27.0
   with:
     # The root changelog file
     # string
@@ -84,6 +84,21 @@ steps:
     # Optional
     password: ""
 
+    # [PRO] Enable or disable reporting.
+    # bool
+    # Optional
+    reportEnabled: ""
+
+    # [PRO] The name of the report.
+    # string
+    # Optional
+    reportName: ""
+
+    # [PRO] The path to the directory to generate the report.
+    # string
+    # Optional
+    reportPath: ""
+
     # The path to the script to use to perform the rollback
     # string
     # Optional
@@ -106,7 +121,7 @@ The liquibase rollback one changeset action accepts all valid liquibase global o
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: liquibase-github-actions/rollback-one-changeset@v4.26.0
+  - uses: liquibase-github-actions/rollback-one-changeset@v4.27.0
     with:
       changelogFile: ""
       changesetAuthor: ""

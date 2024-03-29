@@ -29,10 +29,13 @@ message RollbackOneChangesetRequest {
   optional bool force = 12; // A required safety flag to indicate you intend to use this feature
   optional string label_filter = 13; // Label expression to use for filtering
   optional string password = 14; // Password to use to connect to the database
-  optional string rollback_script = 15; // The path to the script to use to perform the rollback
-  string url = 16; // *required* The JDBC database connection URL
-  optional string username = 17; // Username to use to connect to the database
-  liquibase.GlobalOptions global_options = 18;
+  optional bool report_enabled = 15; // [PRO] Enable or disable reporting.
+  optional string report_name = 16; // [PRO] The name of the report.
+  optional string report_path = 17; // [PRO] The path to the directory to generate the report.
+  optional string rollback_script = 18; // The path to the script to use to perform the rollback
+  string url = 19; // *required* The JDBC database connection URL
+  optional string username = 20; // Username to use to connect to the database
+  liquibase.GlobalOptions global_options = 21;
 }
 
 message Response {
