@@ -6,7 +6,7 @@ Official GitHub Action to run Liquibase Rollback One Changeset in your GitHub Ac
 ```yaml
 steps:
 - uses: actions/checkout@v3
-- uses: liquibase-github-actions/rollback-one-changeset@v4.30.0
+- uses: liquibase-github-actions/rollback-one-changeset@v4.31.0
   with:
     # The root changelog file
     # string
@@ -98,6 +98,16 @@ steps:
     # Optional
     reportPath: ""
 
+    # [PRO] Setting to prevent the display of exceptions (which might contain SQL) in operation reports. If suppressSql is on, and no value is provided here, it is assumed to also be on.
+    # bool
+    # Optional
+    reportSuppressException: ""
+
+    # [PRO] Setting to prevent the display of changeset SQL in operation reports.
+    # bool
+    # Optional
+    reportSuppressSql: ""
+
     # The path to the script to use to perform the rollback
     # string
     # Optional
@@ -120,7 +130,7 @@ The liquibase rollback one changeset action accepts all valid liquibase global o
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: liquibase-github-actions/rollback-one-changeset@v4.30.0
+  - uses: liquibase-github-actions/rollback-one-changeset@v4.31.0
     with:
       changelogFile: ""
       changesetAuthor: ""

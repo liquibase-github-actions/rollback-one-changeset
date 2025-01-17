@@ -31,10 +31,12 @@ message RollbackOneChangesetRequest {
   optional bool report_enabled = 15; // [PRO] Enable or disable reporting.
   optional string report_name = 16; // [PRO] The name of the report.
   optional string report_path = 17; // [PRO] The path to the directory to generate the report.
-  optional string rollback_script = 18; // The path to the script to use to perform the rollback
-  string url = 19; // *required* The JDBC database connection URL
-  optional string username = 20; // Username to use to connect to the database
-  liquibase.GlobalOptions global_options = 21;
+  optional bool report_suppress_exception = 18; // [PRO] Setting to prevent the display of exceptions (which might contain SQL) in operation reports. If suppressSql is on, and no value is provided here, it is assumed to also be on.
+  optional bool report_suppress_sql = 19; // [PRO] Setting to prevent the display of changeset SQL in operation reports.
+  optional string rollback_script = 20; // The path to the script to use to perform the rollback
+  string url = 21; // *required* The JDBC database connection URL
+  optional string username = 22; // Username to use to connect to the database
+  liquibase.GlobalOptions global_options = 23;
 }
 
 message Response {
