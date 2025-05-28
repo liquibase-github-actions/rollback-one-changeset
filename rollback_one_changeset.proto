@@ -19,7 +19,7 @@ message RollbackOneChangesetRequest {
   string changelog_file = 3; // *required* The root changelog file
   string changeset_author = 4; // *required* The author of the changeset to rollback
   string changeset_id = 5; // *required* The id of the changeset to rollback
-  string changeset_path = 6; // *required* The target database password
+  string changeset_path = 6; // *required* The path relative to the root changelog of the changeset to rollback
   optional string context_filter = 7; // Context string to use for filtering
   optional string default_catalog_name = 8; // The default catalog name to use for the database connection
   optional string default_schema_name = 9; // The default schema name to use for the database connection
